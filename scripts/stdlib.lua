@@ -396,7 +396,6 @@ debug.getinfo = function(lvl, fields)
     return debuginfo
 end
 
-ffi = nil
 __vc_app = nil
 __vc_internals = nil
 __vc_lock_internal_modules()
