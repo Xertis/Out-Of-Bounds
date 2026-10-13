@@ -1,0 +1,116 @@
+name: Sync res from VoxelCore
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Upstream commit SHA, tag or branch (empty = latest main)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  UPSTREAM_URL: https://github.com/MihailRis/voxelcore.git
+  UPSTREAM_BRANCH: main
+  FOLDER: res
+  SYNC_BRANCH: upstream-sync
+  BASE_BRANCH: ${{ github.event.repository.default_branch }}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clone upstream and resolve commit
+        env:
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          set -euo pipefail
+          git clone --no-tags "$UPSTREAM_URL" /tmp/upstream
+
+          REF="${INPUT_REF:-$UPSTREAM_BRANCH}"
+          SHA=""
+          for candidate in "$REF" "origin/$REF"; do
+            if SHA=$(git -C /tmp/upstream rev-parse --verify --quiet "${candidate}^{commit}"); then
+              break
+            fi
+            SHA=""
+          done
+          if [ -z "$SHA" ]; then
+            echo "::error::Cannot resolve '$REF' in upstream"; exit 1
+          fi
+          if ! git -C /tmp/upstream cat-file -e "$SHA:$FOLDER" 2>/dev/null; then
+            echo "::error::Folder '$FOLDER' does not exist in commit $SHA"; exit 1
+          fi
+
+          echo "UPSTREAM_SHA=$SHA" >> "$GITHUB_ENV"
+          echo "UPSTREAM_SHORT=${SHA:0:8}" >> "$GITHUB_ENV"
+
+      - name: Split folder history
+        run: |
+          set -euo pipefail
+          git -C /tmp/upstream subtree split -P "$FOLDER" -b split-result "$UPSTREAM_SHA"
+          git fetch /tmp/upstream "+split-result:refs/remotes/upstream-split/result"
+          echo "SPLIT_SHA=$(git rev-parse refs/remotes/upstream-split/result)" >> "$GITHUB_ENV"
+
+      - name: Check whether anything is new
+        run: |
+          if git merge-base --is-ancestor "$SPLIT_SHA" "origin/$BASE_BRANCH"; then
+            echo "Commit $UPSTREAM_SHORT is already merged into $BASE_BRANCH, nothing to do."
+            echo "### Already up to date (\`$UPSTREAM_SHORT\`)" >> "$GITHUB_STEP_SUMMARY"
+            echo "SKIP=true" >> "$GITHUB_ENV"
+          fi
+
+      - name: Prepare sync branch
+        if: env.SKIP != 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git merge-base "origin/$BASE_BRANCH" "$SPLIT_SHA" > /dev/null 2>&1; then
+            # Shared history exists: the branch is just the clean split result
+            git checkout -B "$SYNC_BRANCH" "$SPLIT_SHA"
+          else
+            # First import: histories are unrelated, so build the merge here
+            git checkout -B "$SYNC_BRANCH" "origin/$BASE_BRANCH"
+            git merge --allow-unrelated-histories --no-edit \
+              -m "Import $FOLDER from VoxelCore at $UPSTREAM_SHORT" \
+              "$SPLIT_SHA"
+          fi
+
+          git push origin "HEAD:refs/heads/$SYNC_BRANCH" --force
+
+      - name: Create or update PR
+        if: env.SKIP != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TITLE="Sync $FOLDER from VoxelCore @ $UPSTREAM_SHORT"
+          cat > /tmp/body.md <<EOF
+          Automated update of \`$FOLDER\` from upstream.
+
+          - Upstream: ${UPSTREAM_URL%.git}
+          - Commit: ${UPSTREAM_URL%.git}/commit/$UPSTREAM_SHA
+
+          **Merge with a merge commit. Do not squash or rebase**, otherwise
+          the link with upstream history is lost and later PRs will conflict.
+          EOF
+
+          PR=$(gh pr list --head "$SYNC_BRANCH" --base "$BASE_BRANCH" --state open \
+                 --json number -q '.[0].number')
+          if [ -z "$PR" ]; then
+            gh pr create --head "$SYNC_BRANCH" --base "$BASE_BRANCH" \
+              --title "$TITLE" --body-file /tmp/body.md
+          else
+            gh pr edit "$PR" --title "$TITLE" --body-file /tmp/body.md
+            echo "Updated existing PR #$PR"
+          fi
