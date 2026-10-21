@@ -1,0 +1,3 @@
+build/*
+.oob/
+src/ts/**/tsconfig.json

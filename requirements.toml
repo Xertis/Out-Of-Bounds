@@ -1,0 +1,6 @@
+[engine]
+url = "https://github.com/MihailRis/voxelcore/releases/download/v0.32.7/voxelcore-0.32.7_win64.zip"
+
+[packs]
+neutron_server = "Xertis/Neutron-Server"
+neutron_client = "Xertis/Neutron-Client"
