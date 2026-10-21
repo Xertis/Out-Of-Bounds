@@ -58,6 +58,10 @@ jobs:
 
           rm -rf "$FOLDER"
           git -C /tmp/up archive "$UPSTREAM_SHA" "$FOLDER" | tar -x
+
+          # The base content pack is maintained by this repository, not upstream.
+          rm -rf "$FOLDER/content/base"
+
           git add -A
 
           if ! git diff --cached --quiet; then
