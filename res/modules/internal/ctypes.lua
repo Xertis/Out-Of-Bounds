@@ -5,22 +5,50 @@ FFI.cdef[[
     long long strtoll(const char* nptr, char** endptr, int base);
 ]]
 
+local ERANGE = 34
+
 local this = {}
 
-local function create_integral_type(ctype_name, signed)
+local function parse(ctype_name, signed, value, base)
     local parse_func = signed and FFI.C.strtoll or FFI.C.strtoull
+    if type(base) ~= "number" then
+        base = 10
+    end
+    if value == "" then
+        error("invalid integer string: empty", 3)
+    end
+    local endptr = FFI.new("char*[1]")
+    FFI.errno(0)
+    local wide = parse_func(value, endptr, base)
+    if endptr[0][0] ~= 0 then
+        error(string.format("invalid integer string: %q", value), 3)
+    end
+    if FFI.errno() == ERANGE then
+        error(string.format("integer out of range for %s: %q", ctype_name, value), 3)
+    end
+
+    if not signed and value:find("^%s*%-") and wide ~= 0 then
+        error(string.format("integer out of range for %s: %q", ctype_name, value), 3)
+    end
+    local result = FFI.cast(ctype_name, wide)
+    if FFI.sizeof(ctype_name) < 8 and tonumber(result) ~= tonumber(wide) then
+        error(string.format("integer out of range for %s: %q", ctype_name, value), 3)
+    end
+    return result
+end
+
+local function create_integral_type(ctype_name, signed)
     return function(value, base)
-        value = value or 0
+        if value == nil then
+            value = 0
+        end
         local typename = type(value)
-        if typename == "number" then
+        if typename == "number" or typename == "cdata" then
             return FFI.cast(ctype_name, value)
         elseif typename == "string" then
-            if type(base) ~= "number" then
-                base = 10
-            end
-            return parse_func(value, nil, base)
+            return parse(ctype_name, signed, value, base)
         end
-        error(string.format("invalid value type: %s", typename))
+        error(string.format("invalid value type: %s", typename), 2)
     end
 end
 

@@ -325,7 +325,7 @@ entities.get_all = function(uids)
         for k,v in pairs(stdcomp.get_all()) do
             values[k] = v
         end
-        return values 
+        return values
     else
         return stdcomp.get_all(uids)
     end
@@ -396,7 +396,6 @@ debug.getinfo = function(lvl, fields)
     return debuginfo
 end
 
-ffi = nil
 __vc_app = nil
 __vc_internals = nil
 __vc_lock_internal_modules()
