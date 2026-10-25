@@ -1,6 +1,6 @@
 name="out-of-bounds"
 title="out-of-bounds"
-base_packs=["frontend", "game", "server","client"]
+base_packs=["frontend", "game", "server", "client"]
 permissions=[
     "network",
     "record-audio",

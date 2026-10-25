@@ -1,9 +1,9 @@
 {
   "game": {
-    "content_packs": ["game", "frontend"],
+    "content_packs": ["base", "game", "frontend"],
     "plugins": [],
     "worlds": {
-      "overworld": {
+      "default": {
         "seed": "86935665463",
         "generator": "core:default",
         "rules": {
@@ -11,7 +11,7 @@
         }
       }
     },
-    "main_world": "Default name"
+    "main_world": "default"
   },
   "server": {
     "version": "0.0.0",
@@ -21,8 +21,8 @@
     "port": 22003,
     "http_enabled": true,
     "auto_save_interval": 5,
-    "chunks_loading_distance": 4,
-    "chunks_loading_speed": 4,
+    "chunks_loading_distance": 8,
+    "chunks_loading_speed": 6,
     "password_auth": false,
     "last_session_lifetime": 30,
     "dev_mode": false,

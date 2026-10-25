@@ -1,16 +1,15 @@
 import { openWorld } from "../../lib/world_manager";
-import { WorldConfig } from "../../lib/types/server_config";
 
-interface WorldsCallbacks extends VC.LayoutCallbacks {
+interface UiCallbacks extends VC.LayoutCallbacks {
     open_world(this: void, name: string): void
 }
 
 export function create(
     this: void,
     context: VC.LayoutContext
-): WorldsCallbacks {
+): UiCallbacks {
     return {
-        on_open(this: void): void {
+        on_open(this: void) {
             const worlds = world.get_list()
 
             for (const info of worlds) {
@@ -26,7 +25,7 @@ export function create(
                 )
             }
         },
-        open_world(this: void, name: string): void {
+        open_world(this: void, name: string) {
             openWorld(name)
         },
     }

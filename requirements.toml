@@ -5,5 +5,5 @@ url = "https://github.com/MihailRis/voxelcore/releases/download/v0.32.7/voxelcor
 include = ["worlds"]
 
 [packs]
-neutron_server = "Xertis/Neutron-Server"
-neutron_client = "Xertis/Neutron-Client"
+neutron_server = { repo = "Xertis/Neutron-Server", branch = "singleplayer-improve" }
+neutron_client = { repo = "Xertis/Neutron-Client", branch = "singleplayer-improve" }

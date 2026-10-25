@@ -3,6 +3,12 @@ import "client:api/v2/api"
 let identity = "Player";
 let username = "Player";
 
+let currentServer: Neutron.Shell.ServerConnection | undefined;
+
+export function getServer(): Neutron.Shell.ServerConnection | undefined {
+  return currentServer;
+}
+
 export const contract: Neutron.Shell.Contract = {
     players: {
         get_main_identity: () => identity,
@@ -14,6 +20,7 @@ export const contract: Neutron.Shell.Contract = {
     handlers: {
         game: {
             join: (server, player) => {
+                currentServer = server;
                 debug.print(`joined ${server.ip} as ${player.name}`);
             },
             on_disconnect: (server, packet) => {

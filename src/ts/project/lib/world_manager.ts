@@ -1,30 +1,55 @@
-import type { ServerConfig, WorldConfig, WorldRules } from "./types/server_config"
 import { shell } from "client:api/v2/api"
+
+const serverConfigFile = file.read("frontend:resources/server_config.json")
+
+export type ServerConfig = Neutron.Shell.ServerConfig;
+export type WorldConfig = Neutron.Shell.WorldConfig;
+export type GameConfig = Neutron.Shell.GameConfig;
+export type RoleConfig = Neutron.Shell.RoleConfig;
+
+function makeConfig(
+    worldName: string,
+    worldConfig?: WorldConfig,
+    contentPacks?: string[]
+): ServerConfig {
+    const [major, minor] = vc.get_version()
+    const configEngineVersion = `${major}.${minor}.0`
+
+    let serverConfig = json.parse(serverConfigFile) as ServerConfig
+
+    if (worldConfig) serverConfig.game.worlds[worldName] = worldConfig
+    else serverConfig.game.worlds[worldName] = serverConfig.game.worlds["default"]!
+
+    optional(contentPacks, (p) => {
+        p.push("game")
+        p.push("base")
+        serverConfig.game.content_packs = [...new Set(contentPacks)]
+    })
+
+    serverConfig.game.main_world = worldName
+    serverConfig.server.version = configEngineVersion
+
+    return serverConfig
+}
 
 export function createWorld(
     worldName: string,
     worldConfig: WorldConfig,
     contentPacks: string[]
 ) {
-    const [major, minor] = vc.get_version()
-    const configEngineVersion = `${major}.${minor}.0`
+    const serverConfig = makeConfig(worldName, worldConfig, contentPacks)
 
-    const serverConfigFile = file.read("frontend:resources/server_config.json")
-    let serverConfig = json.parse(serverConfigFile) as ServerConfig
-
-    contentPacks.push("game")
-
-    serverConfig.game.main_world = worldName
-    serverConfig.game.worlds[worldName] = worldConfig
-    serverConfig.game.content_packs = [...new Set(contentPacks)]
-
-    serverConfig.server.version = configEngineVersion
+    shell.internal.connections.run_single(serverConfig, 0, "player", "player", (server) => {
+        debug.print("вроде подключились")
+    })
 }
 
 export function openWorld(
     worldName: string
 ) {
-    shell.internal.connections.run_single(worldName, 0, "player", "player", (server) => {
+    const serverConfig = makeConfig(worldName)
+
+    shell.internal.connections.run_single(serverConfig, 0, "player", "player", (server) => {
         debug.print("вроде подключились")
     })
 }
