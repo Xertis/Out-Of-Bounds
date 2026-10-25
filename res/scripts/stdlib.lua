@@ -118,6 +118,8 @@ local function complete_app_lib(app)
             error("max ticks exceed")
         end
     end
+
+    app.get_pack_env = internals.get_pack_env
 end
 
 complete_app_lib(__app)

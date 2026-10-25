@@ -2,7 +2,7 @@
 url = "https://github.com/MihailRis/voxelcore/releases/download/v0.32.7/voxelcore-0.32.7_win64.zip"
 
 [build]
-exclude = ["res/content"]
+include = ["worlds"]
 
 [packs]
 neutron_server = "Xertis/Neutron-Server"

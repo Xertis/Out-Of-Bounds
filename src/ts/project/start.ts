@@ -1,7 +1,9 @@
-export function run(application: typeof app): void {
-    application.tick()
-    application.config_packs(["frontend", "client"])
-    application.load_content()
+const manager = lazy(import("./lib/shell/manager"));
 
-    menu.page = "main"
+export function run(): void {
+    app.tick()
+    app.config_packs(["frontend", "client"])
+    app.load_content()
+
+    manager.init()
 }

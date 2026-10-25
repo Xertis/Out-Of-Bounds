@@ -1,3 +1,6 @@
 build/*
 .oob/
 src/ts/**/tsconfig.json
+# oobts (generated)
+src/rs/target/
+worlds/*

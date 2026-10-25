@@ -1,3 +1,6 @@
+import { openWorld } from "../../lib/world_manager";
+import { WorldConfig } from "../../lib/types/server_config";
+
 interface WorldsCallbacks extends VC.LayoutCallbacks {
     open_world(this: void, name: string): void
 }
@@ -24,7 +27,7 @@ export function create(
             }
         },
         open_world(this: void, name: string): void {
-
+            openWorld(name)
         },
     }
 }
