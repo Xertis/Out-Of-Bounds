@@ -22,7 +22,6 @@ function makeConfig(
 
     optional(contentPacks, (p) => {
         p.push("game")
-        p.push("base")
         serverConfig.game.content_packs = [...new Set(contentPacks)]
     })
 

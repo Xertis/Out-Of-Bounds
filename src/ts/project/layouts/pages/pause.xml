@@ -1,4 +1,1 @@
-<panel size='400' color='0' interval='1' context='menu'>
-    <button onclick='gui.close_menu()'>@Continue</button>
-    <button onclick='leave()'>@Save and Quit to Menu</button>
-</panel>
+<container id="root" color="#00000000" position-func="0,0" size-func="unpack(gui.get_viewport())" />

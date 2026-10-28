@@ -1,0 +1,18 @@
+{
+  "model": "custom",
+  "model-name": "leaves",
+  "draw-group": 2,
+  "light-passing": true,
+  "sky-light-passing": true,
+  "hitbox": [0, 0, 0, 1, 1, 1],
+  "texture": "oak_leaves",
+  "culling": "optional",
+  "game:durability": 0.5,
+  "game:drop": "nil",
+  "state-based": {
+      "bits": 1,
+      "variants": [
+          { "model": "block" }
+      ]
+  }
+}

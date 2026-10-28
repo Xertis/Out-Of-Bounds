@@ -7,6 +7,7 @@ export function init() {
     shellInfo = shell.register_as_shell(contract);
 
     shell.internal.add_trusted_pack("frontend")
+    shell.internal.add_trusted_pack("kompot")
     shell.internal.run(app);
 }
 

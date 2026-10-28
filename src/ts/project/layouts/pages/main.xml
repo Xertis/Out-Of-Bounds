@@ -1,7 +1,1 @@
-<panel size='400' color='0' interval='1' context='menu'>
-    <button onclick='menu.page="worlds"'>@Worlds</button>
-    <button onclick='menu.page="scripts"'>@Scripts</button>
-    <button onclick='menu.page="settings"'>@Settings</button>
-    <button onclick='menu.page="content_menu"'>@Content</button>
-    <button onclick='app.quit(true)'>@Quit</button>
-</panel>
+<container id="root" color="#00000000" position-func="0,0" size-func="unpack(gui.get_viewport())" />

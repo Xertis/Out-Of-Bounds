@@ -1,0 +1,8 @@
+{
+    "components": [
+        "game:breaking_block"
+    ],
+    "skeleton-name": "game:block",
+    "body-type": "static",
+    "hitbox": [0.98, 0.98, 0.98]
+}

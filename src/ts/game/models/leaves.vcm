@@ -1,0 +1,80 @@
+@box from (0, 0, 0) to (1, 1, 1) origin (0, 0, -0.0625) {
+    @part tags (south) texture "$0" region (0, 0, 1, 1)
+    @part tags (west) texture "$0" region (0, 0, 1, 1)
+    @part tags (north) texture "$0" region (0, 0, 1, 1)
+    @part tags (east) texture "$0" region (1, 0, 0, 1)
+    @part tags (top) texture "$0" region (1, 1, 0, 0)
+    @part tags (bottom) texture "$0" region (1, 0, 0, 1)
+}
+@box from (0.1875, 0.1875, 0.1875) to (0.8125, 0.8125, 0.8125) origin (0, 0, -0.0625) {
+    @part tags (south) texture "$0" region (0, 0, 1, 1)
+    @part tags (west) texture "$0" region (0, 0, 1, 1)
+    @part tags (north) texture "$0" region (0, 0, 1, 1)
+    @part tags (east) texture "$0" region (1, 0, 0, 1)
+    @part tags (top) texture "$0" region (1, 1, 0, 0)
+    @part tags (bottom) texture "$0" region (1, 0, 0, 1)
+}
+@box from (-0.125, 0.625, 0) to (0.375, 1.125, 0.5) origin (0.125, 0.875, 0.25) rotate (-0.170311576625, -0.033877078899, 0.192126461659, 0.965884948181) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}
+@box from (0.5, -0.0625, 0.5625) to (1, 0.4375, 1.0625) origin (0.75, 0.1875, 0.8125) rotate (-0.636942683099, -0.534458365819, -0.167063154322, 0.529856750565) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}
+@box from (0.5, 0.625, 0.625) to (1, 1.125, 1.125) origin (0.75, 0.875, 0.875) rotate (0.153329744205, -0.23182197376, 0.159687353732, 0.947232026001) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}
+@box from (0.6875, 0.5, -0.125) to (1.1875, 1, 0.375) origin (0.9375, 0.75, 0.125) rotate (-0.174935254812, -0.249187599276, -0.230963354195, 0.924099088848) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}
+@box from (0.5625, 0, -0.125) to (1.0625, 0.5, 0.375) origin (0.8125, 0.25, 0.125) rotate (0.139102442848, 0.180416473124, 0.215798801201, 0.949490012596) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}
+@box from (-0.125, -0.0625, 0.5625) to (0.375, 0.4375, 1.0625) origin (0.125, 0.1875, 0.8125) rotate (0.274452177991, 0.054591932457, 0.187296435244, 0.941602765635) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}
+@box from (-0.125, 0.5625, 0.5625) to (0.375, 1.0625, 1.0625) origin (0.125, 0.8125, 0.8125) rotate (-0.04024333152, -0.269360564607, -0.088233395947, 0.958144158435) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}
+@box from (0, -0.125, -0.0625) to (0.5, 0.375, 0.4375) origin (0.25, 0.125, 0.1875) rotate (-0.456398156336, 0.190128428066, -0.288980702396, 0.819781713249) {
+    @part tags (south) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (west) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (north) texture "$0" region (0, 0.5, 0.5, 1)
+    @part tags (east) texture "$0" region (0.5, 0.5, 0, 1)
+    @part tags (top) texture "$0" region (0.5, 1, 0, 0.5)
+    @part tags (bottom) texture "$0" region (0.5, 0.5, 0, 1)
+}

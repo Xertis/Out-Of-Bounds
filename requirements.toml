@@ -3,7 +3,9 @@ url = "https://github.com/MihailRis/voxelcore/releases/download/v0.32.7/voxelcor
 
 [build]
 include = ["worlds"]
+exclude = ["res/content"]
 
 [packs]
 neutron_server = { repo = "Xertis/Neutron-Server", branch = "singleplayer-improve" }
 neutron_client = { repo = "Xertis/Neutron-Client", branch = "singleplayer-improve" }
+kompot = "https://vlauncher.space/api/v1/artifacts/592a1f823737d986a8eddbc16eec782b48e234757d836d8ba5e73d290b9a0d26?source=vspace"

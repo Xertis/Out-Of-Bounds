@@ -1,0 +1,9 @@
+{
+    "texture": "transparent",
+    "hidden": true,
+    "picking-item": "game:stone.item",
+    "draw-group": 2,
+    "light-passing": true,
+    "sky-light-passing": true,
+    "translucent": true
+}

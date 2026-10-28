@@ -1,14 +1,1 @@
-<panel size='400' color='0' interval='1' context='world'>
-    <label>@Name</label>
-    <textbox id='name_box'
-             validator='world_name_validator'
-             placeholder='-'
-             padding='4'>
-    </textbox>
-    <label>@Seed</label>
-    <textbox id='seed_box' placeholder='-' padding='4'></textbox>
-    <button onclick='create_world()' margin='0,20,0,1'>
-        @Create World
-    </button>
-    <button onclick='menu:back()'>@Back</button>
-</panel>
+<container id="root" color="#00000000" position-func="0,0" size-func="unpack(gui.get_viewport())" />

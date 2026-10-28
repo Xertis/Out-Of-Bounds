@@ -1,6 +1,6 @@
 {
   "game": {
-    "content_packs": ["base", "game", "frontend"],
+    "content_packs": ["game", "frontend"],
     "plugins": [],
     "worlds": {
       "default": {

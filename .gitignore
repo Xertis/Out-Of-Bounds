@@ -4,3 +4,5 @@ src/ts/**/tsconfig.json
 # oobts (generated)
 src/rs/target/
 worlds/*
+*.ptex
+src/ts/game/textures/blocks/references/

@@ -1,0 +1,28 @@
+{
+  "models": [
+      "drop-item",
+      "leaves"
+  ],
+  "atlases": [
+      {"name": "hearth", "type": "separate"}
+  ],
+  "textures": [
+      "misc/moon",
+      "misc/moon_flare",
+      "misc/sun",
+      "gui/crosshair",
+      "gui/devastation"
+  ],
+  "fonts": [
+      {
+          "name": "gui_icons",
+          "path": "fonts/gui_icons.otf",
+          "size": 30
+      },
+      {
+          "name": "gui_font",
+          "path": "fonts/gui_font.otf",
+          "size": 50
+      }
+  ]
+}
