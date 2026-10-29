@@ -1,5 +1,8 @@
 {
     "textures": [
         "misc/planet_transparent"
+    ],
+    "post-effects": [
+        "planet_shader"
     ]
 }
